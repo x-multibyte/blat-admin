@@ -1,7 +1,8 @@
 laravel: '@testbench'
 
 providers:
-  # - Workbench\App\Providers\WorkbenchServiceProvider
+  - XMultibyte\BlatAdmin\BlatAdminServiceProvider
+  - XMultibyte\BlatAdmin\Providers\AdminServiceProvider
 
 migrations:
   - workbench/database/migrations
