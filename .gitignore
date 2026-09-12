@@ -4,6 +4,7 @@
 .agents/settings.json
 /vendor
 /build
+/bin
 /.phpunit.cache
 /.phpunit.result.cache
 /coverage
