@@ -41,22 +41,22 @@ class AdminGuard extends SessionGuard
      *
      * @param  array<string, mixed>  $credentials
      */
-    public function attempt(array $credentials = [], $remember = false): bool
+    public function attempt(array $credentials = [], mixed $remember = false): bool
     {
         $credentials['is_active'] = true;
 
-        return parent::attempt($credentials, $remember);
+        return parent::attempt($credentials, (bool) $remember);
     }
 
     /**
      * Log a user into the application.
      */
-    public function login(Authenticatable $user, $remember = false): void
+    public function login(Authenticatable $user, mixed $remember = false): void
     {
         if ($user instanceof Admin && ! $user->isActive()) {
             return;
         }
 
-        parent::login($user, $remember);
+        parent::login($user, (bool) $remember);
     }
 }

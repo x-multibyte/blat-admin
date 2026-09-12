@@ -6,16 +6,15 @@ namespace XMultibyte\BlatAdmin\Auth;
 
 use Illuminate\Auth\EloquentUserProvider;
 use Illuminate\Contracts\Auth\Authenticatable;
+use SensitiveParameter;
 use XMultibyte\BlatAdmin\Models\Admin;
 
 class AdminUserProvider extends EloquentUserProvider
 {
     /**
      * Retrieve a user by their unique identifier.
-     *
-     * @param  mixed  $identifier
      */
-    public function retrieveById($identifier): ?Authenticatable
+    public function retrieveById(mixed $identifier): ?Authenticatable
     {
         $model = $this->createModel();
 
@@ -27,11 +26,8 @@ class AdminUserProvider extends EloquentUserProvider
 
     /**
      * Retrieve a user by their unique identifier and "remember me" token.
-     *
-     * @param  mixed  $identifier
-     * @param  string  $token
      */
-    public function retrieveByToken($identifier, $token): ?Authenticatable
+    public function retrieveByToken(mixed $identifier, #[SensitiveParameter] mixed $token): ?Authenticatable
     {
         $model = $this->createModel();
 
@@ -46,7 +42,7 @@ class AdminUserProvider extends EloquentUserProvider
 
         $rememberToken = $retrievedModel->getRememberToken();
 
-        return $rememberToken && hash_equals($rememberToken, $token)
+        return $rememberToken && hash_equals($rememberToken, (string) $token)
             ? $retrievedModel
             : null;
     }
